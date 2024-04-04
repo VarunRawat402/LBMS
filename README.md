@@ -3,6 +3,7 @@ LibApp is a library management system designed to help librarians efficiently ma
 Built with Java and Spring Boot.
 
 Features:
+
 1 User Authentication and Authorization: The LibApp supports multiple user roles, including administrators and library students, each with specific permissions and access levels.
 
 2 Admins: Administrators can add new admins to the LibApp. They are also able to add new books or remove existing books from the LibApp.
