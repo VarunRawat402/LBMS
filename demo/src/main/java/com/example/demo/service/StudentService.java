@@ -29,4 +29,8 @@ public class StudentService {
     public Student findStudentById(int id){
         return sr.findById(id).orElse(null);
     }
+
+    public void delete(int studentId) {
+        sr.deleteById(studentId);
+    }
 }

@@ -29,12 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().and()
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/student_for_admin/**","/admin").hasAuthority(Authority.ADMIN_AUTHORITY)
+                .antMatchers("/admin/**").hasAuthority(Authority.ADMIN_AUTHORITY)
                 .antMatchers(HttpMethod.POST, "/student/**").permitAll()
                 .antMatchers("/student/**", "/txn/**").hasAuthority(Authority.STUDENT_AUTHORITY)
-                .antMatchers("/book/filter/**").hasAnyAuthority(Authority.STUDENT_AUTHORITY,Authority.ADMIN_AUTHORITY)
-                .antMatchers("/book/**").hasAuthority(Authority.ADMIN_AUTHORITY)
-                .antMatchers("/**").permitAll()
+                .antMatchers("/book/filter/**","/book/**").hasAnyAuthority(Authority.STUDENT_AUTHORITY,Authority.ADMIN_AUTHORITY)
                 .and()
                 .formLogin();
     }

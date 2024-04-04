@@ -50,7 +50,7 @@ public class Book {
     private Date updatedOn;
 
     //Getting all the txn of this book
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Txn> txnList;
 

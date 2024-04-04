@@ -59,4 +59,8 @@ public class BookService {
     public void create(Book book){
         br.save(book);
     }
+
+    public void delete(int id) {
+        br.deleteById(id);
+    }
 }

@@ -47,12 +47,12 @@ public class Student implements Serializable {
     private Date updatedOn;
 
     //Getting all the books for this student
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student",cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("student")
     private List<Book> bookList;
 
     //Getting all the txn for this student
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("student")
     private List<Txn> txnList;
 

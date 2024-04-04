@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.example.demo.Repository.AdminRepository;
 import com.example.demo.Repository.UserRepository;
+import com.example.demo.models.Admin;
+import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,21 +30,21 @@ public class DemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//
-//		User user = User.builder()
-//				.username("raj")
-//				.password(passwordEncoder.encode("raj123"))
-//				.authority("adm")
-//				.build();
-//
-//		user = userRepository.save(user);
-//
-//		Admin admin = Admin.builder()
-//				.age(40)
-//				.name("Raj Shukla")
-//				.user(user)
-//				.build();
-//
-//		adminRepository.save(admin);
+
+		User user = User.builder()
+				.username("raj")
+				.password(passwordEncoder.encode("raj123"))
+				.authority("adm")
+				.build();
+
+		user = userRepository.save(user);
+
+		Admin admin = Admin.builder()
+				.age(40)
+				.name("Raj Shukla")
+				.user(user)
+				.build();
+
+		adminRepository.save(admin);
 	}
 }

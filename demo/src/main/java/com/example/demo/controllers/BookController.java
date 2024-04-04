@@ -18,9 +18,10 @@ public class BookController {
 
     //To create a Book in the DB
     //Need to pass BookRequest and Author Details in the postman
-    @PostMapping("/book")
-    public void createBook(@RequestBody @Valid BookRequest bookRequest){
+    @PostMapping("/admin/book")
+    public String createBook(@RequestBody @Valid BookRequest bookRequest){
         bs.create(bookRequest);
+        return "The book has been successfully added to the library.";
     }
     
     //To get the List of Books based on filter
@@ -35,6 +36,12 @@ public class BookController {
     @GetMapping("/book")
     public Book getBookById(@RequestParam("bookId") int bId){
         return bs.findBookById(bId);
+    }
+
+    @DeleteMapping("/admin/book")
+    public String deleteBook(@RequestParam("id") int id){
+        bs.delete(id);
+        return "The book with ID " + id + " has been successfully removed from the library.";
     }
 
 }

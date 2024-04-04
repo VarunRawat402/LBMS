@@ -6,6 +6,7 @@ import com.example.demo.models.Txn;
 import com.example.demo.models.User;
 import com.example.demo.requests.StudentRequest;
 import com.example.demo.service.StudentService;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,11 +22,15 @@ public class StudentController {
     @Autowired
     StudentService ss;
 
+    @Autowired
+    UserService userService;
+
     //To create a Student in the DB
     //Need to pass the StudentRequest in the Postman
     @PostMapping("/student")
-    public void createStudent(@RequestBody @Valid StudentRequest studentRequest){
+    public String createStudent(@RequestBody @Valid StudentRequest studentRequest){
         ss.create(studentRequest);
+        return "Your account has been created successfully.";
     }
 
     //To check the details of own ( no need to pass anything )
@@ -41,7 +46,7 @@ public class StudentController {
     }
 
     //To check the details of any student in the DB ( need to pass studentId )
-    @GetMapping("/student_for_admin")
+    @GetMapping("/admin/student")
     public Student getStudentForAdmin(@RequestParam("studentId") int studentId) throws Exception {
         // check the person accessing this API is an admin or not
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -77,6 +82,28 @@ public class StudentController {
         int studentId = user.getStudent().getId();
         Student student = ss.findStudentById(studentId);
         return student.getTxnList();
+    }
+
+    @DeleteMapping("/student/self")
+    public String deleteSelf() throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        if(user.getStudent() == null){
+            throw new Exception("You are not a student of the library.");
+        }
+        int studentId = user.getStudent().getId();
+        ss.delete(studentId);
+        userService.delete(user.getId());
+        return "Student has been deleted Successfully";
+    }
+
+    @DeleteMapping("/admin/student/{studentId}")
+    public String deleteStudent(@PathVariable int studentId) throws Exception {
+        Student student = ss.findStudentById(studentId);
+        int userId = student.getUser().getId();
+        ss.delete(studentId);
+        userService.delete(userId);
+        return "Student has been deleted Successfully";
     }
 
 }
