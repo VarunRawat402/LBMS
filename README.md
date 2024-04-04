@@ -7,5 +7,5 @@ Features:
 #: Admins: Administrators can add new admins to the LibApp. They are also able to add new books or remove existing books from the LibApp.
 #: Students: Students can create their accounts on the LibApp and borrow the books they want to read. They need to return the book within 14 days of the issue date; otherwise, they will incur a fine.
 #: Borrowing and Returning Books: The system automatically checks the due date and fines when the user borrows or returns a book.
-#: Search and Filtering: Users can easily search for the book they want by various criteria, such as book name, author name, book ID, or genre.
+#: Search and Filtering: Users can easily search for the book they want by various criteria, such as book name, author name, book ID, or genre..
 #: And many more functionalities.
